@@ -1,14 +1,19 @@
-<div style="width: 100%; border: none; margin: none; position: fixed; z-index: 300; color: black">
-    <ul class="nav nav-tabs">
-        <li style="float: right" ng-hide="currentUser.username=='anonym'">
-            Belépve, mint <b>{{currentUser.alias}}</b> (Role: {{currentUser.role}})
-            <div ng-click="kilepes()" style="cursor: pointer; color: blue">
-                Kilépés
-            </div>
-        </li>
-        <li style="float: right" ng-show="currentUser.username=='anonym'">
-            <button class="btn btn-default" onclick="$('#loginAblak').modal('show')">Login</button>
-        </li>
-    </ul>
+<div>
+
+    <div style="width: 100%; border: none; margin: none; position: fixed; z-index: 300; color: black">
+        <ul class="nav nav-tabs">
+            <li style="float: right" ng-hide="currentUser.username=='anonym'">
+                Belépve, mint <b>{{currentUser.alias}}</b> (Role: {{currentUser.role}})
+                <div ng-click="kilepes()" style="cursor: pointer; color: blue">
+                    Kilépés
+                </div>
+            </li>
+            <li style="float: right" ng-show="currentUser.username=='anonym'">
+                <button class="btn btn-default" onclick="$('#loginAblak').modal('show')">Login</button>
+            </li>
+        </ul>
+
+    </div>
+
 
 </div>

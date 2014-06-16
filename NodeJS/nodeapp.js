@@ -155,7 +155,13 @@ app.get('/sikerBE/ping', function(req, res) {
 
 app.get('/sikerBE/logout', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
-    console.log("logout called by " + req.session.passport.user.username);
+
+    var utemp = req.session.passport.user.username;
+    if (utemp === undefined) {
+        utemp = 'session nelkuli hivas';
+    }
+
+    console.log("logout called by " + utemp);
 
     req.logout();
     res.send("ok");

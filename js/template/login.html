@@ -1,0 +1,97 @@
+<div>
+
+
+    <div class="modal fade" id="loginAblak">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: darkgray">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="my3">
+
+                        <div class="control-group">
+                            <label class="control-label">Email address</label>
+                            <input type="text"
+                                   ng-model="login.email"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+                            <input type="text"
+                                   ng-model="login.password"/>
+                        </div>
+                        <br/>
+
+                        {{login.error}}
+
+                    </form>
+
+                    <button class="btn-link"
+                            onclick="$('#loginAblak').modal('hide');
+                        $('#registerAblak').modal('show')">
+                        Register - Click here if you haven't got account yet.
+                    </button>
+
+                    <img src="img/sn_wa.gif" ng-show='loginInProgress'/>
+
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-success" 
+                             ng-click="loginUser()">Login2</button>
+
+
+                    <button class="btn btn-dange" data-dismiss="modal" aria-hidden="true">Mégse</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    
+    <div class="modal fade" id="registerAblak">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: darkgray">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Register</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" name="my">
+
+                        <div class="control-group">
+                            <label class="control-label">Email address</label>
+                            <input type="text"
+                                   ng-model="newuser.email"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Alias</label>
+                            <input type="text"
+                                   ng-model="newuser.alias"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+                            <input type="text"
+                                   ng-model="newuser.password"/>
+                        </div>
+
+                        <br/>
+                        {{newuser.error}}
+
+
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-success" 
+                             ng-click="registerUser()">Register</button>
+
+
+                    <button class="btn btn-dange" data-dismiss="modal" aria-hidden="true">Mégse</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+    
+</div>
