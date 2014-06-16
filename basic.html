@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html ng-app="animateApp" lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>ProudLog</title>
+
+        <!-- CSS -->
+        <!-- load bootstrap (bootswatch version) -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
+        <link rel="stylesheet" type="text/css" href="css/component.css" />
+        <link rel="stylesheet" type="text/css" href="css/animations.css" />
+        <script src="js/lib/modernizr.custom.js"></script>
+
+        <script>
+            var aktWindow = "fooldal";
+        </script>
+
+    </head>
+
+    <!-- apply our angular app -->
+    <body style="background-color: white" ng-controller="basicController">
+
+    <menu-component></menu-component>
+
+
+    <div id="pt-main" class="pt-perspective">
+        <div class="pt-page t-page-1" style="height: 100%;background-color: white; overflow: hidden"
+             id="fooldal">
+            <div style="padding: 10px;background-color: white; color: darkgrey; height: 100%; text-align: center; vertical-align: middle">
+                <br/>
+                <h1><strong>MAIN </strong> PAGE</h1>
+                <br/>
+                <br/><br/>
+                Mehetsz 4 égtáj felé.
+                <br/>
+                <br/>
+                <h1>Hír: 3 új</h1>
+                <h1>Pontszám: 230</h1>
+                <br/>
+            </div>
+        </div>
+
+        <div class="pt-page pt-page-2"
+             id="jobboldal"><h1><span>A collection of</span><strong>Page2</strong> jobb Transitions</h1>
+
+
+            <button class="pt-touch-button"
+                    onclick="hir_mutat('jobboldal', 'hiroldal')">
+                Show message
+            </button>
+
+
+        </div>
+        <div class="pt-page pt-page-3" style="background-color: white; overflow: auto"
+             id="baloldal">
+
+            <div style="padding: 10px;background-color: white; color: darkgrey; height: 100%; text-align: center; 
+                 overflow-x: hidden; overflow-y: scroll;
+                 vertical-align: middle">
+                <h1><span>A collection of</span><strong>Page3</strong> bal Transitions</h1>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
+                Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. 
+                Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.
+
+            </div>
+
+        </div>
+        <div class="pt-page pt-page-4" style="overflow: auto"
+             id="alsooldal">
+
+
+            <div style="padding: 10px;background-color: white; color: darkgrey; height: 100%; width: 300%;
+                 text-align: left; vertical-align: middle;">
+
+                <h1 style="left: 0px; text-align: left"><strong>Alsó</strong> oldal</h1>
+
+                Scroll jobbra és balra.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
+                Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. 
+                Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.
+
+            </div>
+
+        </div>
+        <div class="pt-page pt-page-5"
+             id="felsooldal">
+            <h1><strong>Felső</strong> oldal</h1>
+
+        </div>
+        <div class="pt-page pt-page-6"
+             id="hiroldal">
+            <h1><span>A collection of</span><strong>Hírek</strong> </h1>
+
+            <div style="width: 150px; height: 40px; cursor: pointer; background-color: lawngreen; text-align: center; vertical-align: central"
+                 onclick="hir_rejt('hiroldal', 'jobboldal')">
+                Vissza
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="loginAblak">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: darkgray">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="my3">
+
+                        <div class="control-group">
+                            <label class="control-label">Email address</label>
+                            <input type="text"
+                                   ng-model="login.email"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+                            <input type="text"
+                                   ng-model="login.password"/>
+                        </div>
+                        <br/>
+
+                        {{login.error}}
+
+                    </form>
+                    
+                    <button class="btn-link"
+                        onclick="$('#loginAblak').modal('hide');$('#registerAblak').modal('show')">
+                        Register - Click here if you haven't got account yet.
+                    </button>
+                    
+                    <img src="img/sn_wa.gif" ng-show='loginInProgress'/>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-success" 
+                             ng-click="loginUser()">Login</button>
+
+
+                    <button class="btn btn-dange" data-dismiss="modal" aria-hidden="true">Mégse</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+
+    <div class="modal fade" id="registerAblak">
+        <div class="modal-dialog">
+            <div class="modal-content" style="color: darkgray">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Register</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" name="my">
+
+                        <div class="control-group">
+                            <label class="control-label">Email address</label>
+                            <input type="text"
+                                   ng-model="newuser.email"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Alias</label>
+                            <input type="text"
+                                   ng-model="newuser.alias"/>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+                            <input type="text"
+                                   ng-model="newuser.password"/>
+                        </div>
+
+                        <br/>
+                        {{newuser.error}}
+
+
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-success" 
+                             ng-click="registerUser()">Register</button>
+
+
+                    <button class="btn btn-dange" data-dismiss="modal" aria-hidden="true">Mégse</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- JS -->
+    <!-- load angular, ngRoute, ngAnimate -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="js/lib/jquery-1.10.2.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/pagetransitions.js"></script>
+    <script src="js/lib/jquery.touchSwipe.js"></script>
+
+    <!-- load directives  -->
+    <script src="js/directive/swipe.js"></script>
+    <script src="js/directive/menu.js"></script>
+
+    <swipe-enabler></swipe-enabler>
+
+
+
+
+</body>
+</html>

@@ -3,8 +3,8 @@
  */
 
 var env = {
-    mongodb_st: 'mongodb://localhost/sikernaplo',
-    nodejs_port: 8090
+    mongodb_st: 'mongodb://localhost/testsikernaplo',
+    nodejs_port: 8091
 };
 
 module.exports = env;

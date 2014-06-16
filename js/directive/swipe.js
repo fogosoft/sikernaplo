@@ -8,28 +8,14 @@ animateApp.directive('swipeEnabler', function() {
 
             console.log("swipe directive inited");
 
-            $("body").swipe({
+            /* swipe */
+            $("#fooldal").swipe({
                 //Generic swipe handler for all directions
                 swipeLeft: function(event, direction, distance, duration, fingerCount) {
-                    console.log("mozgas jobbra, regiOldal:" + $rootScope.aktOldal);
-
-                    if ($rootScope.aktOldal === 'mysuccess') {
-                        window.location = "#";
-                    } else if ($rootScope.aktOldal === 'dashboard') {
-                        window.location = "#contact";
-                    }
-
-
+                    anim_jobbra("fooldal", "jobboldal");
                 },
                 swipeRight: function(event, direction, distance, duration, fingerCount) {
-                    console.log("balra mozgas, regiOldal:" + $rootScope.aktOldal);
-
-                    if ($rootScope.aktOldal === 'myteam') {
-                        window.location = "#";
-                    } else if ($rootScope.aktOldal === 'dashboard') {
-                        window.location = "#about";
-                    }
-
+                    anim_balra("fooldal", "baloldal");
                 },
                 swipeUp: function(event, direction, distance, duration, fingerCount) {
                     anim_fel("fooldal", "alsooldal");
@@ -40,6 +26,33 @@ animateApp.directive('swipeEnabler', function() {
 
             });
 
+            $("#felsooldal").swipe({
+                //Generic swipe handler for all directions
+                swipeUp: function(event, direction, distance, duration, fingerCount) {
+                    anim_fel("felsooldal", "fooldal");
+                }
+            });
+
+            $("#alsooldal").swipe({
+                //Generic swipe handler for all directions
+                swipeDown: function(event, direction, distance, duration, fingerCount) {
+                    anim_le("alsooldal", "fooldal");
+                }
+            });
+
+            $("#baloldal").swipe({
+                //Generic swipe handler for all directions
+                swipeLeft: function(event, direction, distance, duration, fingerCount) {
+                    anim_jobbra("baloldal", "fooldal");
+                }
+            });
+
+            $("#jobboldal").swipe({
+                //Generic swipe handler for all directions
+                swipeRight: function(event, direction, distance, duration, fingerCount) {
+                    anim_balra("jobboldal", "fooldal");
+                }
+            });
 
         },
         //the link method does the work of setting the directive

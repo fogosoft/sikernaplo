@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
@@ -64,8 +62,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
+    clientID: 'FACEBOOK_APP_ID',
+    clientSecret: 'FACEBOOK_APP_SECRET',
     callbackURL: "http://www.example.com/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, done) {
@@ -73,15 +71,15 @@ function(accessToken, refreshToken, profile, done) {
     Account.find({'provider_id': profile.id, 'provider': 'facebook'}, function(err, olduser) {
 
         if (olduser._id) {
-            console.log('User: ' + olduser.username +  ' found and logged in!');
+            console.log('User: ' + olduser.username + ' found and logged in!');
             done(null, olduser);
         } else {
             var newuser = new Account({
-            provider : "facebook", 
-            provider_id: profile.id,
-            role: '',
-            username : profile.name.givenName + profile.name.familyName,
-            email : "TBD..."
+                provider: "facebook",
+                provider_id: profile.id,
+                role: '',
+                username: profile.name.givenName + profile.name.familyName,
+                email: "TBD..."
             });
 
             newuser.save(function(err) {
@@ -120,7 +118,7 @@ app.get('/auth/facebook/callback',
         );
 
 
-app.post('/eroforrasBE/mentes', function(req, res) {
+app.post('/sikerBE/mentes', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With, X-HTTP-Method-Override, Content-Type, myHeaderKey, Accept");
     console.log("mentes post");
@@ -134,14 +132,14 @@ app.post('/eroforrasBE/mentes', function(req, res) {
 
 });
 
-app.options('/eroforrasBE/mentes', function(req, res) {
+app.options('/sikerBE/mentes', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("mentes opt");
 
     res.send("ok?");
 });
 
-app.get('/eroforrasBE/ping', function(req, res) {
+app.get('/sikerBE/ping', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("pingged by " + req.session.passport.user.username);
 //    console.log("belepve:" + req.isAuthenticated());
@@ -155,7 +153,7 @@ app.get('/eroforrasBE/ping', function(req, res) {
 
 });
 
-app.get('/eroforrasBE/logout', function(req, res) {
+app.get('/sikerBE/logout', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("logout called by " + req.session.passport.user.username);
 
@@ -164,7 +162,7 @@ app.get('/eroforrasBE/logout', function(req, res) {
 });
 
 
-app.get('/eroforrasBE/testemail', function(req, res) {
+app.get('/sikerBE/testemail', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("testemail");
 
@@ -182,7 +180,7 @@ app.get('/eroforrasBE/testemail', function(req, res) {
 
 });
 
-app.get('/eroforrasBE/aktUser', function(req, res) {
+app.get('/sikerBE/aktUser', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
 
     var tempu = req.session.passport.user;
@@ -192,7 +190,6 @@ app.get('/eroforrasBE/aktUser', function(req, res) {
     }
 
     req.session.foo = Date.now();
-
     req.session.touch(function(err) {
         // session saved
         console.log("session touched:" + err);
@@ -210,7 +207,7 @@ app.get('/eroforrasBE/aktUser', function(req, res) {
     }
 });
 
-app.post('/eroforrasBE/login', function(req, res, next) {
+app.post('/sikerBE/login', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("login post");
 
@@ -220,27 +217,52 @@ app.post('/eroforrasBE/login', function(req, res, next) {
         }
         if (!user) {
             console.log("nincs ilyen user");
-            return res.send("nem ok");
+            return res.send("nemok");
         }
         req.logIn(user, function(err) {
             if (err) {
-                return res.send("egyeb hiba");
+                return res.send("egyebhiba");
             }
             console.log("belépés ok");
-            return res.send("ok");
+            res.send(req.session.passport.user);
+//            return req.session.passport.user;
         });
     })(req, res, next);
 });
 
-app.options('/eroforrasBE/login', function(req, res) {
+app.options('/sikerBE/login', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log("login opt");
 });
 
+app.post('/sikerBE/register', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log("reg post");
 
+    Account.register(
+            new Account({
+        username: req.query.useremail,
+        alias: req.query.username,
+        role: 'basic',
+        email: req.query.useremail}
+    ), req.query.password, function(err, account) {
+        if (err) {
+            console.log("hiba:" + account);
+        } else {
+            console.log("ok:" + account.username);
+        }
+        res.send(account.username);
+    });
+
+});
+
+app.options('/eroforrasBE/register', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log("reg opt");
+});
 
 app.listen(Env.nodejs_port);
-console.log('Listening on port: ' + Env.nodejs_port);
+console.log('Proudlog listening on port: ' + Env.nodejs_port);
 
 
 
