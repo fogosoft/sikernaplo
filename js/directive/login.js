@@ -39,6 +39,32 @@ animateApp.directive('loginEnabler', function() {
             };
 
 
+            $scope.loginFBUser = function() {
+                console.log("loginFBUser");
+                $scope.loginInProgress = true;
+
+                $http({
+                    method: "GET",
+                    url: server_nodeurl + "/testsikerBE/fblogin",
+                    params: {
+                    }
+                }).success(function(data) {
+                    $scope.loginInProgress = false;
+
+                    console.log("reg válasz:" + data);
+                    if (data === 'nemok') {
+                        $scope.login.error = "FB login nem OK";
+                    } else {
+                        $('#loginAblak').modal('hide');
+                        $rootScope.currentUser = data;
+                        $rootScope.$broadcast("user_ok", {
+                            currentUser: data
+                        });
+                    }
+                });
+
+            };
+
             $scope.registerUser = function() {
 
                 $http({

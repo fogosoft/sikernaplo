@@ -62,29 +62,37 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new FacebookStrategy({
-    clientID: 'FACEBOOK_APP_ID',
-    clientSecret: 'FACEBOOK_APP_SECRET',
-    callbackURL: "http://www.example.com/auth/facebook/callback"
+    clientID: '262128657326475',
+    clientSecret: '05aa7be515e5e6eb31480845807a2278',
+    callbackURL: "http://www.proudlog.com/testsikerBE/fbauth/callback"
 },
 function(accessToken, refreshToken, profile, done) {
 
+    console.log("FB check");
+    console.log(profile);
+
     Account.find({'provider_id': profile.id, 'provider': 'facebook'}, function(err, olduser) {
 
-        if (olduser._id) {
-            console.log('User: ' + olduser.username + ' found and logged in!');
+        //console.log("HIba:"+err);
+        console.log("Kereses:"+olduser);
+
+        if (olduser.length>=1) {
+            console.log('User: ' + olduser[0].email + ' found and logged in!');
             done(null, olduser);
         } else {
+
             var newuser = new Account({
                 provider: "facebook",
                 provider_id: profile.id,
-                role: '',
-                username: profile.name.givenName + profile.name.familyName,
-                email: "TBD..."
+                role: 'basic',
+                username: profile.displayName,
+                alias: profile.displayName,
+                email: profile.emails[0].value
             });
 
             newuser.save(function(err) {
                 if (err) {
-                    throw err;
+                    console.log("Hiba van:" + err);
                 }
                 console.log('New user: ' + newuser.username + ' created and logged in!');
                 done(null, newuser);
@@ -92,30 +100,28 @@ function(accessToken, refreshToken, profile, done) {
         }
     });
 
-//    Account.findOrCreate(profile.name, function(err, user) {
-//        if (err) {
-//            return done(err);
-//        }
-//        done(null, user);
-//    });
 }
 ));
 
-// Redirect the user to Facebook for authentication.  When complete,
-// Facebook will redirect the user back to the application at
-//     /auth/facebook/callback
-app.get('/auth/facebook',
-        passport.authenticate('facebook', {scope: ['read_stream', 'publish_actions']})
-        );
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
-app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {successRedirect: '/',
-    failureRedirect: '/login'})
-        );
+app.get('/sikerBE/fblogin',
+        function(req, res,next) {
+            console.log("fb login call1");
+            res.header("Access-Control-Allow-Origin", "*");
+            next();
+        },
+        passport.authenticate('facebook', {scope: ['email','user_friends', 'user_photos', 'publish_actions']}));
+
+app.get('/sikerBE/fbauth/callback',
+        passport.authenticate('facebook'),
+        function(req, res) {
+            console.log("after fb callback");
+            res.header("Access-Control-Allow-Origin", "*");
+
+            console.log("FB login sikeres:"+req.isAuthenticated());
+            res.redirect("/sikernaplo/basic.html");
+
+        });
 
 
 app.post('/sikerBE/mentes', function(req, res) {

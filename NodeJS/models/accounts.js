@@ -10,7 +10,8 @@ var Account = new Schema({
     email: String,
     provider: String,
     provider_id: String,
-    provider_token: String
+    provider_token: String,
+    photo: String
 });
 
 Account.plugin(passportLocalMongoose);
