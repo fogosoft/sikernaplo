@@ -38,7 +38,6 @@ animateApp.directive('loginEnabler', function() {
 
             };
 
-
             $scope.loginFBUser = function() {
                 console.log("loginFBUser");
                 $scope.loginInProgress = true;
@@ -86,6 +85,37 @@ animateApp.directive('loginEnabler', function() {
 
 
             };
+
+            $scope.$on('event:google-plus-signin-success', function(event, authResult) {
+                // Send login to server or save into cookie
+                $http({
+                    method: "POST",
+                    url: server_nodeurl + "/testsikerBE/gauth/callback",
+                    params: {
+                        code: authResult.code
+                    }
+                }).success(function(data) {
+                    $scope.loginInProgress = false;
+                    console.log("node gauth/callback valasz:");
+                    console.log(data);
+                    if (data === 'nemok') {
+                        $scope.login.error = "Invalid username or password";
+                    } else {
+                        $('#loginAblak').modal('hide');
+                        $rootScope.currentUser = data;
+                        $rootScope.$broadcast("user_ok", {
+                            currentUser: data
+                        });
+                    }
+                    $('#signinButton').hide();
+                });
+
+
+            });
+            $scope.$on('event:google-plus-signin-failure', function(event, authResult) {
+                // Auth failure or signout detected
+                 console.log('There was an error: ' + authResult.error);
+            });
 
 
         },

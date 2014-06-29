@@ -1,4 +1,4 @@
-var animateApp = angular.module('animateApp', []);
+var animateApp = angular.module('animateApp', ['directive.g+signin']);
 
 animateApp.controller('basicController', function($scope, $rootScope, $http) {
 

@@ -29,7 +29,7 @@
 
                     <button class="btn-link"
                             onclick="$('#loginAblak').modal('hide');
-                        $('#registerAblak').modal('show')">
+                                    $('#registerAblak').modal('show')">
                         Register - Click here if you haven't got account yet.
                     </button>
 
@@ -40,9 +40,13 @@
                     <button  class="btn btn-success" 
                              ng-click="loginUser()">Login2</button>
                     
-                    <a  class="btn btn-success" 
-                             href="http://www.proudlog.com/testsikerBE/fblogin">Login with FB</a>
+                    <button  class="btn btn-success" 
+                             onclick="signOutGoogle()">Logout google</button>
 
+                    <a  class="btn btn-success" 
+                        href="http://www.proudlog.com/testsikerBE/fblogin">Login with FB</a>
+                    
+                    <google-plus-signin clientid="354437215227-la2qsd4541ucl132a7p1fhbrf6pu4rmj.apps.googleusercontent.com"></google-plus-signin>
 
                     <button class="btn btn-dange" data-dismiss="modal" aria-hidden="true">Mégse</button>
                 </div>
@@ -50,7 +54,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    
+
     <div class="modal fade" id="registerAblak">
         <div class="modal-dialog">
             <div class="modal-content" style="color: darkgray">
@@ -83,7 +87,7 @@
 
 
                     </form>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button  class="btn btn-success" 
@@ -95,6 +99,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    
-    
+
+
 </div>

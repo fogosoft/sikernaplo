@@ -8,6 +8,7 @@ var util = require('util');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GooglePlusStrategy = require('passport-google-plus');
 var nodemailer = require("nodemailer");
 
 var Env = require('./env');
@@ -72,15 +73,11 @@ function(accessToken, refreshToken, profile, done) {
     console.log(profile);
 
     Account.find({'provider_id': profile.id, 'provider': 'facebook'}, function(err, olduser) {
-
-        //console.log("HIba:"+err);
-        console.log("Kereses:"+olduser);
-
-        if (olduser.length>=1) {
+        console.log("Kereses:" + olduser);
+        if (olduser.length >= 1) {
             console.log('User: ' + olduser[0].email + ' found and logged in!');
             done(null, olduser);
         } else {
-
             var newuser = new Account({
                 provider: "facebook",
                 provider_id: profile.id,
@@ -103,14 +100,55 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
+passport.use(new GooglePlusStrategy({
+    clientId: '354437215227-la2qsd4541ucl132a7p1fhbrf6pu4rmj.apps.googleusercontent.com',
+    clientSecret: '_nK-nF8YKwHw7DcNGSsW5iCW'
+},
+function(tokens, profile, done) {
+    // Create or update user, call done() when complete...
+
+    console.log("Google callback");
+    console.log(profile);
+
+    Account.find({'provider_id': profile.id, 'provider': 'google'}, function(err, olduser) {
+        console.log("Kereses:" + olduser);
+        if (olduser.length >= 1) {
+            console.log('User: ' + olduser[0].email + ' found and logged in!');
+            done(null, olduser[0]);
+        } else {
+            var newuser = new Account({
+                provider: "google",
+                provider_id: profile.id,
+                role: 'basic',
+                username: profile.displayName,
+                alias: profile.displayName,
+                email: profile.email,
+                image: profile.image.url
+            });
+
+            newuser.save(function(err) {
+                if (err) {
+                    console.log("Hiba van:" + err);
+                }
+                console.log('New user: ' + newuser.username + ' created and logged in!');
+                done(null, newuser);
+            });
+        }
+    });
+
+    //done(null, profile, tokens);
+}
+));
+
+
 
 app.get('/sikerBE/fblogin',
-        function(req, res,next) {
+        function(req, res, next) {
             console.log("fb login call1");
             res.header("Access-Control-Allow-Origin", "*");
             next();
         },
-        passport.authenticate('facebook', {scope: ['email','user_friends', 'user_photos', 'publish_actions']}));
+        passport.authenticate('facebook', {scope: ['email', 'user_friends', 'user_photos', 'publish_actions']}));
 
 app.get('/sikerBE/fbauth/callback',
         passport.authenticate('facebook'),
@@ -118,11 +156,37 @@ app.get('/sikerBE/fbauth/callback',
             console.log("after fb callback");
             res.header("Access-Control-Allow-Origin", "*");
 
-            console.log("FB login sikeres:"+req.isAuthenticated());
+            console.log("FB login sikeres:" + req.isAuthenticated());
             res.redirect("/sikernaplo/basic.html");
 
         });
 
+
+app.post('/sikerBE/gauth/callback',
+        passport.authenticate('google'),
+        function(req, res) {
+            console.log("after google callback");
+            res.header("Access-Control-Allow-Origin", "*");
+
+            console.log("Google login sikeres:" + req.isAuthenticated());
+            
+            if (req.session.passport.user === undefined) {
+                res.send("nemok");
+            } else {
+                //ha be van lepve akkor visszakuldjuk a session parametereit
+                console.log("visszakuldott user:");
+                console.log(req.session.passport.user);
+                res.send(req.session.passport.user);
+            }
+
+        });
+
+app.options('/sikerBE/gauth/callback',
+        function(req, res) {
+            console.log("after google callback options");
+            res.header("Access-Control-Allow-Origin", "*");
+
+        });
 
 app.post('/sikerBE/mentes', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");

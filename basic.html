@@ -15,6 +15,9 @@
         <link rel="stylesheet" type="text/css" href="css/animations.css" />
         <script src="js/lib/modernizr.custom.js"></script>
 
+        <!-- Google+ auth pre-requisites -->
+        <script src="js/lib/jquery-1.10.2.min.js"></script>
+
         <script>
             var aktWindow = "fooldal";
         </script>
@@ -108,12 +111,13 @@
 
 
     <!-- JS -->
-    <!-- load angular, ngRoute, ngAnimate -->
+    <!-- load angular and modules -->
     <script src="js/lib/angular.min.js"></script>
+    <script src="js/module/google-plus-signin.js"></script>
     <script src="js/index.js"></script>
     <script src="js/app.js"></script>
 
-    <script src="js/lib/jquery-1.10.2.min.js"></script>
+
     <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/lib/pagetransitions.js"></script>
     <script src="js/lib/jquery.touchSwipe.js"></script>
@@ -125,8 +129,6 @@
 
     <swipe-enabler></swipe-enabler>
     <login-enabler></login-enabler>
-
-
 
 
 </body>
